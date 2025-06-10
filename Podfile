@@ -6,14 +6,17 @@ abstract_target 'Astrolabe' do
   pod 'Astrolabe', :path => '.'
   pod 'Gnomon'
   pod 'Gnomon/Decodable'
+  pod 'RxSwift', '~> 6.6.0'
+  pod 'RxCocoa', '~> 6.6.0'
+  pod 'RxRelay', '~> 6.6.0'
 
   target 'Demo' do
-    platform :ios, '9.0'
+    platform :ios, '13.0'
     pod 'SnapKit'
   end
 
   target 'DemoTV' do
-    platform :tvos, '9.0'
+    platform :tvos, '13.0'
     pod 'SnapKit'
   end
 
@@ -22,15 +25,15 @@ abstract_target 'Astrolabe' do
 
     pod 'Quick'
     pod 'Nimble'
-    pod 'RxBlocking'
-    pod 'RxTest'
+    pod 'RxTest', '~> 6.6.0'
+    pod 'RxBlocking', '~> 6.6.0'
 
     target 'iOSTests' do
-      platform :ios, '9.0'
+      platform :ios, '13.0'
     end
 
     target 'tvOSTests' do
-      platform :tvos, '9.0'
+      platform :tvos, '13.0'
     end
   end
 end

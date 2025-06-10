@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   }
   s.source = { :git => 'https://github.com/netcosports/Astrolabe.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
-  s.tvos.deployment_target = '9.0'
+  s.ios.deployment_target = '13.0'
+  s.tvos.deployment_target = '13.0'
 
   s.swift_versions = ['5.0', '5.1']
 
@@ -22,8 +22,8 @@ Pod::Spec.new do |s|
     sub.source_files = 'Sources/Core/*.swift'
     sub.tvos.exclude_files = ['Sources/Core/*PagerSource.swift', 'Sources/Core/*PagerCollectionViewCell.swift']
 
-    sub.dependency 'RxSwift', '~> 5'
-    sub.dependency 'RxCocoa', '~> 5'
+    sub.dependency 'RxSwift', '~> 6.8.0'
+    sub.dependency 'RxCocoa', '~> 6.8.0'
   end
 
   s.subspec 'Loaders' do |sub|

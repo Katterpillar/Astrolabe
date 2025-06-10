@@ -146,16 +146,16 @@ open class LoaderDecoratorSource<DecoratedSource: ReusableSource>: LoaderReusabl
     }
   }
 
-  fileprivate func startAutoupdateIfNeeded() {
-    guard timerDisposeBag == nil else { return }
-    let disposeBag = DisposeBag()
-    Observable<Int>.interval(autoupdatePeriod, scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
-      self?.load(.autoupdate)
-    }).disposed(by: disposeBag)
-    timerDisposeBag = disposeBag
-  }
+    fileprivate func startAutoupdateIfNeeded() {
+        guard timerDisposeBag == nil else { return }
+        let disposeBag = DisposeBag()
+        Observable<Int>.timer(.seconds(Int(autoupdatePeriod)), period: .seconds(Int(autoupdatePeriod)), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] _ in
+            self?.load(.autoupdate)
+        }).disposed(by: disposeBag)
+        timerDisposeBag = disposeBag
+    }
 
-  fileprivate func needToHandleIntent(intent: LoaderIntent) -> Bool {
+    fileprivate func needToHandleIntent(intent: LoaderIntent) -> Bool {
     switch state {
     case .loading(let currentIntent):
       if intent == .force(keepData: false) || intent == .pullToRefresh {

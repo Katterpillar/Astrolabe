@@ -69,13 +69,9 @@ class DiffCollectionViewViewModel {
       }
     }.bind(to: input.isLoading).disposed(by: disposeBag)
 
-    Observable<Int>.interval(0.1, scheduler: SerialDispatchQueueScheduler(qos: .background)).map { _ in
+    Observable<Int>.interval(.seconds(Int(0.1)), scheduler: SerialDispatchQueueScheduler(qos: .background)).map { _ in
       LoaderResultEvent.force(sections: [], context: nil)
     }.bind(to: input.source.sectionsObserver).disposed(by: disposeBag)
-
-//    Observable<Int>.interval(0.3, scheduler: MainScheduler.instance).map { _ in
-//      LoaderResultEvent.softCurrent
-//      }.bind(to: input.source.sectionsObserver).disposed(by: disposeBag)
   }
 
   private func load(for intent: LoaderIntent) -> Observable<LoaderResultEvent> {

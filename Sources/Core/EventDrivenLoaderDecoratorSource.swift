@@ -325,16 +325,14 @@ open class EventDrivenLoaderDecoratorSource<DecoratedSource: ReusableSource>: Re
     }
   }
 
-  fileprivate func startAutoupdateIfNeeded() {
-    guard timerDisposeBag == nil else { return }
-    let disposeBag = DisposeBag()
-    Observable<Int>
-      .interval(settings.autoupdatePeriod, scheduler: scheduler)
-      .subscribe(onNext: { [weak self] _ in
-      self?.intentSubject.onNext(.autoupdate)
-    }).disposed(by: disposeBag)
-    timerDisposeBag = disposeBag
-  }
+    fileprivate func startAutoupdateIfNeeded() {
+      guard timerDisposeBag == nil else { return }
+      let disposeBag = DisposeBag()
+        Observable<Int>.interval(.seconds(Int(settings.autoupdatePeriod)), scheduler: scheduler).subscribe(onNext: { [weak self] _ in
+        self?.intentSubject.onNext(.autoupdate)
+      }).disposed(by: disposeBag)
+      timerDisposeBag = disposeBag
+    }
 
   fileprivate func needToHandle(intent: LoaderIntent) -> Bool {
     switch state {
